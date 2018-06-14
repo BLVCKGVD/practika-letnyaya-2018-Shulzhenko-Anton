@@ -1,1 +1,46 @@
+body {
+		font-family: sans-serif;
+	}
+	.pass-block {
+		width:99%;
+		border: 2px solid black;
+	}
+	.pass-block-settings {
+		width: 100%;
+	}
+	.pass-block-result {
+		width: 95%;
+		word-break: break-all;
+	}
+	.pass-block-settings-cb {
+		float: left;
+		width: 250px;
+		padding: 5px 0px 0px 5px;
+	}
+	.pass-block-settings-inputs {
+		float:right;
+		text-align:left;
+		width: 270px;
+		padding: 5px 0px 0px 5px;
+	}
+	.pass-block-btn {
+		width: 100%;
+		border: 1px solid #ccc;
+		background: rgb(88, 148, 216);
+		margin-top: 5px;
+		color: white;
+		cursor: pointer;
+		padding: 10px 0px;
+		transition-delay: 1;
 
+	}
+	.pass-block-btn:hover {
+	 background: #786b59;
+	 color: #ffe;
+	   transition-duration: 3s;
+ 		 transition-delay: 0s, 1s;
+ 			 transition-timing-function: cubic-bezier(0.1, 0.8, 0.5, 2), linear;
+	}
+    color: #ffe;
+	.pass-block-length, .pass-block-count {
+		text-align: right;
