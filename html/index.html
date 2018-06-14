@@ -1,1 +1,158 @@
+<!DOCTYPE HTML
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Генератор паролей</title>
+ </head>
+ <body>
+ 	<div class="up">
+ 		<h2 class="h2">Генератор паролей</h2>
+ 		
+ 	</div>
+<div class="pass-block">
+	<div class="pass-block-settings">
+	<div class="pass-block-settings-cb">
+	<input type="checkbox" id="pass-block-enlo" > Английские прописные буквы <br>
+	<input type="checkbox" id="pass-block-enup" > Английские заглавные буквы <br><input type="checkbox" id="pass-block-rulo" > Русские прописные буквы <br>
+	<input type="checkbox" id="pass-block-ruup" > Русские заглавные буквы <br><input type="checkbox" id="pass-block-sym" > Символы <br><input type="checkbox" id="pass-block-digit" > Цифры
+	</div>
+		<div class="pass-block-settings-inputs">Количество паролей:<br>
+	<input id="pass-block-count" onchange="onChangeDigitInput(this)" onkeyup="onChangeDigitInput(this)" onblur="onBlurDigitInput(this)" class="pass-block-count" type="text" value="10"><br>Длина паролей:<br>
+	<input id="pass-block-length" class="pass-block-length" onchange="onChangeDigitInput(this)" onkeyup="onChangeDigitInput(this)" onblur="onBlurDigitInput(this)" type="text" value="10">
+		</div>
+	</div>
+<button class="pass-block-btn" onclick="onBtnClick()">Генерировать</button>
+<div id="pass-block-result" class="pass-block-result">
+</div>
+<script lang="javascript" type="text/javascript">var charSet = {
+		enup: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+		enlo: 'abcdefghijklmnopqrstuvwxyz',
+		ruup: 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ',
+		rulo: 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя',
+		sym: '!"№;%:?*()_+=-~/\\<>,.[]{}',
+		digit: '1234567890'
+	};
+	function formPass(chars, length) {
+		var res = "",
+			r, i;
+		for (i = 1; i <= length; i++) {
+			r = Math.floor(Math.random() * chars.length);
+			res = res + chars.substring(r, r + 1);
+		}
+		return res;
+	}
+	function formHtmlPass(chars, length) {
+		var res = formPass(chars, length);
+		return res;
+	}
+	function getAllowedChars() {
+		var enlo = document.getElementById('pass-block-enlo').checked,
+			enup = document.getElementById('pass-block-enup').checked,
+			rulo = document.getElementById('pass-block-rulo').checked,
+			ruup = document.getElementById('pass-block-ruup').checked,
+			sym = document.getElementById('pass-block-sym').checked,
+			digit = document.getElementById('pass-block-digit').checked;
+		return (enup ? charSet.enup : '') + (enlo ? charSet.enlo : '') + (ruup ? charSet.ruup : '') + (rulo ? charSet.rulo : '') + (digit ? charSet.digit : '') + (sym ? charSet.sym : '');
+	}
+	function generatePasswords(_length, _count) {
+		var resultBlock = document.getElementById('pass-block-result'),
+			resultHtml = '<ol>',
+			count = isNaN(_count) ? 10 : _count,
+			length = isNaN(_length) ? 10 : _length,
+			chars = getAllowedChars();
+		for (var i = 0; i < count; i++) {
+			resultHtml += '<li>' + formHtmlPass(chars, length) + '</li>';
+		}
+		resultBlock.innerHTML = resultHtml + '</ol>';
+	}
+	function onChangeDigitInput(element) {
+		if (element && (element || {}).value) {
+			if (isNaN(parseInt(element.value))) {
+				element.value = 10;
+			} else if (parseInt(element.value) > 150) {
+				element.value = 150;
+			}
+		} else if (element) {
+			element.value = 10;
+		}
+		onFly();
+	}
+	function onBlurDigitInput(element) {
+		if (element && (element || {}).value) {
+			if (isNaN(parseInt(element.value))) {
+				element.value = 10;
+			} else {
+				element.value = parseInt(element.value);
+			}
+		} else if (element) {
+			element.value = 10;
+		}
+		onFly();
+	}
+	function onFly() {
+		if (document.getElementById('pass-block-onfly').checked) onBtnClick();
+	}
+	function onBtnClick() {
+		var inputCount = document.getElementById('pass-block-count'),
+			inputLength = document.getElementById('pass-block-length');
+		generatePasswords(parseInt(inputLength.value), parseInt(inputCount.value));
+	}
+	function setHandlerOnChangeForCB(id, func) {
+		var checkbox = document.getElementById(id);
 
+			checkbox.onchange = function() {
+			
+			};
+		}
+	
+	</script>
+	<style scoped="scoped" type="text/css">
+	body {
+		font-family: sans-serif;
+	}
+	.pass-block {
+		width:99%;
+		border: 2px solid black;
+	}
+	.pass-block-settings {
+		width: 100%;
+	}
+	.pass-block-result {
+		width: 95%;
+		word-break: break-all;
+	}
+	.pass-block-settings-cb {
+		float: left;
+		width: 250px;
+		padding: 5px 0px 0px 5px;
+	}
+	.pass-block-settings-inputs {
+		float:right;
+		text-align:left;
+		width: 270px;
+		padding: 5px 0px 0px 5px;
+	}
+	.pass-block-btn {
+		width: 100%;
+		border: 1px solid #ccc;
+		background: rgb(88, 148, 216);
+		margin-top: 5px;
+		color: white;
+		cursor: pointer;
+		padding: 10px 0px;
+		transition-delay: 1;
+
+	}
+	.pass-block-btn:hover {
+	 background: #786b59;
+	 color: #ffe;
+	   transition-duration: 3s;
+ 		 transition-delay: 0s, 1s;
+ 			 transition-timing-function: cubic-bezier(0.1, 0.8, 0.5, 2), linear;
+	}
+    color: #ffe;
+	.pass-block-length, .pass-block-count {
+		text-align: right;
+	}</style>
+ </body>
+</html>
