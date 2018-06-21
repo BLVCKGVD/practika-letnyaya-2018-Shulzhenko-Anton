@@ -1,4 +1,4 @@
-/*СКРИПТ Я ПИСАЛ САМ,С ПОПРАВКАМИ МОЕГО ЗНАКОМОГО*/
+
 var charSet = {
 		enup: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 		enlo: 'abcdefghijklmnopqrstuvwxyz',
