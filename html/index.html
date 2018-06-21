@@ -46,13 +46,6 @@
 		var res = formPass(chars, length);
 		return res;
 	}
-	function formHtmlPass(chars, length) {
-		var res = formPass(chars, length);
-		res = res.replace("&", "&amp;");
-		res = res.replace(">", "&gt;");
-		res = res.replace("<", "&lt;");
-		return res;
-	}
 
 	function getAllowedChars() {
 		var enlo = document.getElementById('pass-block-enlo').checked,
